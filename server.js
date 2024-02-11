@@ -54,10 +54,15 @@ const session = require('express-session');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-//Database Connection
-mongoose.connect(process.env.DB_URI, {})
-    .then(() => console.log('Connected to database'))
-    .catch((error) => console.error('Error connecting to database:', error));
+const connectDB = async () => {
+    try {
+      const conn = await mongoose.connect(process.env.DB_URI);
+      console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+      console.log(error);
+      process.exit(1);
+    }
+  }
 
 //middlewares
 app.use(express.urlencoded({ extended: false }));
@@ -83,6 +88,8 @@ app.set('view engine', 'ejs');
 //Routes
 app.use("/", require('./routes/routes'));
 
-app.listen(PORT, () => {
-    console.log(`Server started at http://localhost:${PORT}`);
-});
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log("listening for requests");
+    })
+})
