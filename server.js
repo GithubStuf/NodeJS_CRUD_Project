@@ -10,11 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 const connectDB = async () => {
     try {
-      const conn = await mongoose.connect(process.env.DB_URI,{
-        serverSelectionTimeoutMS: 50000, // Timeout after 5 seconds for server selection
-        socketTimeoutMS: 450000, // Timeout after 45 seconds for socket operations
-        connectTimeoutMS: 100000, // Timeout after 10 seconds for initial connection
-    });
+      const conn = await mongoose.connect(process.env.DB_URI);
       console.log(`MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
       console.log(error);
