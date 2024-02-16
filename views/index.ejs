@@ -31,7 +31,12 @@
                                     </td>
                                     <td><%= row.name %></td>
                                     <td><%= row.email %></td>
-                                    <td><%= row.password %></td>
+                                    <td >
+                                        <input type="password" id="passwordInput<%= index %>" value=`<%= row.password %>` readonly> 
+                                        <button style="border: none;" onclick="togglePasswordVisibility('passwordInput<%= index %>', 'eyeIcon<%= index %>')">
+                                            <i class="fa-solid fa-eye-slash" id="eyeIcon<%= index %>"></i>
+                                        </button>
+                                    </td>
                                     <td>
                                         <a href="/edit/<%=row._id %>" class="text-success">
                                             <i class="fas fa-edit fa-lg mx-1"></i>
@@ -53,3 +58,21 @@
 </div>
 
 <%- include('layout/footer') %>
+
+
+<script>
+     function togglePasswordVisibility(inputId, eyeIconId) {
+        var passwordInput = document.getElementById(inputId);
+        var eyeIcon = document.getElementById(eyeIconId);
+        
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        }
+    }
+</script>

@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type:String,
         required: true,
+        unique:true
     },
     email: {
         type:String,
@@ -19,13 +20,10 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true,
-    },
-    Created: {
-        type: Date,
-        required: true,
-        default: Date.now,
     }
-});
+  },
+    {timestamps:true}
+);
 
 
   

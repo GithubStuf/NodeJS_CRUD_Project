@@ -10,9 +10,13 @@ const User = require('../models/Users');
 
 // HomePage route
 router.get("/", (req, res) => {
-            res.render('HomePage', {
-                title: 'Home Page',
-            });
+    if(!req.session.user){
+        res.render('HomePage', {
+            title: 'Home Page',
+        });
+    }else{
+        res.redirect('/index');
+    }
 });
 
 router.get("/add", (req, res) => {
