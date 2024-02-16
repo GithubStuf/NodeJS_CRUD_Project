@@ -18,12 +18,12 @@
                             <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter email" value="<%= user.email %>" required>
                         </div>
                         <div class="mb-3">
-                            <label for="phone">Phone</label>
-                            <input type="number" name="phone" class="form-control form-control-lg" placeholder="Enter phone" value="<%= user.phone %>" required>
+                            <label for="pass">Password</label>
+                            <input type="password" name="pass" class="form-control form-control-lg" placeholder="Enter password" value="<%= user.password %>" required>
                         </div>
                         <div class="mb-3">
                             <label for="image">Select Image</label>
-                            <input type="file" name="image" class="form-control form-control-lg" required>
+                            <input type="file" name="image" class="form-control form-control-lg">
                         </div>
                         <img src="/<%= user.image %>" width="100" class="img-thumbnail mt-1">
                         <input type="hidden" name="old_image" value="<%= user.image %>">
