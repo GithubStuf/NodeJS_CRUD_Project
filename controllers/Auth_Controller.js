@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/Users');
+const jwt = require('jsonwebtoken');
 
 const authMiddleware = (req, res, next) => {
     // Check if req.session.user is not set
@@ -55,6 +56,10 @@ const authUser = async (req, res, next) => {
                             message:`${user.name}`,
                             
                         });
+                          const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
+                            expiresIn: '1d'
+                          });
+                          res.json({ token });
                     })
                     .catch((err) => {
                         res.json({
@@ -70,10 +75,6 @@ const authUser = async (req, res, next) => {
                 }
             });
 
-    //   const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
-    //     expiresIn: '1 hour'
-    //   });
-    //   res.json({ token });
 
     } catch (error) {
       next(error);
